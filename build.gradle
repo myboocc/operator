@@ -1,0 +1,62 @@
+group 'com.gds.op'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    // servlet-api
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+    //spring相关
+    compile group: 'org.springframework', name: 'spring-beans', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aop', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-expression', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-test', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.0.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '3.2.0.RELEASE'
+    compile 'org.springframework.security:spring-security-web:3.2.0.RELEASE'
+
+    //springData
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.3.RELEASE'
+    // https://mvnrepository.com/artifact/log4j/log4j日志
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.2'
+    //json解析相关
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.12'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.4'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.4'
+
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    compile group: 'commons-io', name: 'commons-io', version: '1.3.1'
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2.2'
+    
+    // https://mvnrepository.com/artifact/org.apache.shiro/shiro-core
+//	compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.2.4'
+    compile group: 'org.apache.shiro', name: 'shiro-all', version: '1.2.3'
+    
+    // https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl
+//	compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    // https://mvnrepository.com/artifact/taglibs/standard
+    compile group: 'taglibs', name: 'standard', version: '1.1.2'
+
+
+}

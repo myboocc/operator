@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--扫描service包嗲所有使用注解的类型-->
+
+    <context:component-scan base-package="com.operator" annotation-config="true"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/> <!-- 10m -->
+        <property name="maxInMemorySize" value="4096"/>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+    <!-- 导入mongodb的配置文件 -->
+    <!--<import resource="spring-mongo.xml" /> -->
+    <!-- 开启注解 -->
+    <context:annotation-config />
+    <!--<aop:aspectj-autoproxy/>-->
+
+    <mvc:annotation-driven/>
+
+    <!-- 访问拦截  -->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**/**"/>-->
+            <!--<bean class="com.operator.interceptor.LoginHandlerInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/opPage/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--静态文件访问,主要是让DispatcherServlet不拦截以下静态资源-->
+    <mvc:resources mapping="/admin/**" location="/admin/" />
+    <mvc:resources mapping="/static/**" location="/static/" />
+    <mvc:resources mapping="/plugins/**" location="/plugins/" />
+    <mvc:resources mapping="/uploadFiles/**" location="/uploadFiles/" />
+
+    <!-- ================ Shiro start ================ -->
+    <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
+        <!--<property name="realm" ref="ShiroRealm" />-->
+    <!--</bean>-->
+
+    <!-- 項目自定义的Realm -->
+    <!--<bean id="ShiroRealm" class="com.operator.interceptor.shiro.ShiroRealm" ></bean>-->
+
+    <!-- Shiro Filter -->
+    <!--<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+        <!--<property name="securityManager" ref="securityManager" />-->
+
+        <!--<property name="loginUrl" value="/" />-->
+
+        <!--<property name="successUrl" value="/main/index" />-->
+
+        <!--<property name="unauthorizedUrl" value="/login/toLogin" />-->
+
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--/static/login/** 			= anon-->
+                <!--/static/js/myjs/** 			= authc-->
+                <!--/static/js/** 				= anon-->
+                <!--/uploadFiles/uploadImgs/** 	= anon-->
+                <!--/code.do 					= anon-->
+                <!--/login/login	 			= anon-->
+                <!--/app**/** 					= anon-->
+                <!--/weixin/** 					= anon-->
+                <!--/**							= authc-->
+            <!--</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!-- ================ Shiro end ================ -->
+
+</beans>
