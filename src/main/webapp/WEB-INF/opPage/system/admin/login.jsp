@@ -114,14 +114,15 @@
 				$.ajax({
 					type: "POST",
 					url: 'login/login',
-			    	data: {KEYDATA:code,tm:new Date().getTime()},
+			    	data: {data:code,tm:new Date().getTime()},
 					dataType:'json',
 					cache: false,
 					success: function(data){
-						if("success" == data.result){
+						console.log(data.msg);
+						if(0 == data.status){
 							saveCookie();
 							window.location.href="main/index";
-						}else if("usererror" == data.result){
+						}else if("userError" == data.msg){
 							$("#loginname").tips({
 								side : 1,
 								msg : "用户名或密码有误",
@@ -129,7 +130,7 @@
 								time : 15
 							});
 							$("#loginname").focus();
-						}else if("codeerror" == data.result){
+						}else if("codeError" == data.msg){
 							$("#code").tips({
 								side : 1,
 								msg : "验证码输入有误",
